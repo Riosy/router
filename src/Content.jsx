@@ -31,7 +31,7 @@ const Content = ()=>{
     <Route path='/todos'element={<Todos/>} />
 
     <Route path='/adduser'element={<AddUser/>} >
-    <Route path=':userId' element={<EditDesc/>}/>
+    <Route path=':userId' element={<EditDesc/>}/> 
     </Route>
 
  </Routes>

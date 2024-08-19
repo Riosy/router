@@ -1,9 +1,11 @@
 import React from 'react';
 import { useParams , Outlet } from 'react-router';
 import style from '../style.module.css'
+import {useNavigate} from 'react-router-dom';
 
 const AddUser = ()=>{
-
+   
+    const navigate = useNavigate()
     const {userId} = useParams();
 
     return (
@@ -42,7 +44,7 @@ const AddUser = ()=>{
                     </div>
                     
                     <div className="col-12 text-start">
-                        <button type="button" class="btn btn-danger ms-2">بازگشت</button>
+                        <button type="button" class="btn btn-danger ms-2"  onClick={()=>navigate(-1)}>بازگشت</button>
                         <button type="submit" class="btn btn-primary" >
                         {userId ? "ویرایش " : "افزودن " }
                         </button>
