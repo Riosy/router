@@ -1,8 +1,30 @@
 import React from 'react';
 import style from '../style.module.css'
 import { Link , useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 const Users = ()=>{
+
+  const handledelete = (x)=> {
+    Swal.fire({
+        title: `ایا میخواهید${x}را حذف کنید`,
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "بله",
+        cancelButtonText: "خیر"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "حذف شد!",
+            text: "",
+            icon: "success"
+          });
+        }
+      });
+  }
 
     const navigate = useNavigate()
 
@@ -39,7 +61,7 @@ const Users = ()=>{
                         <td>mahdicmptr@gmail.com</td>
                         <td> 
                             <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigate("/adduser/1")}></i>
-                            <i className="fas fa-trash text-danger mx-2 pointer"></i>
+                            <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handledelete(1)}></i>
                         </td>
                     </tr>
                 </tbody>
