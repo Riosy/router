@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect , useState } from 'react';
 import style from '../style.module.css'
 import { Link , useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import axios from 'axios'
 
 const Users = ()=>{
 
@@ -26,6 +27,19 @@ const Users = ()=>{
       });
   }
 
+  const [users , setUsers] = useState([])
+
+  useEffect(()=>{
+    axios.get("https://jsonplaceholder.typicode.com/users").then(res=>{
+
+        setUsers(res.data)
+
+    }).catch(err=>{
+        console.log(err)
+    })
+ }
+  ,[])
+
     const navigate = useNavigate()
 
     return (
@@ -43,7 +57,9 @@ const Users = ()=>{
                     </Link>
                 </div>
             </div>
-            <table className="table bg-light shadow">
+
+ {users.length ?(
+                <table className="table bg-light shadow">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -54,18 +70,24 @@ const Users = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>qasem</td>
-                        <td>qasemB</td>
-                        <td>mahdicmptr@gmail.com</td>
+{users.map(U=>(
+                        <tr>
+                        <td>{U.id}</td>
+                        <td>{U.name}</td>
+                        <td>{U.username}</td>
+                        <td>{U.email}</td>
                         <td> 
                             <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigate("/adduser/1")}></i>
                             <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handledelete(1)}></i>
                         </td>
                     </tr>
+))}
                 </tbody>
-            </table>
+            </table>)
+            :(
+                <h4 className='text-center text-info'>لطفا صبر کنید</h4>
+            )}
+
         </div>
     )
 
