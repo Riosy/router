@@ -18,11 +18,19 @@ const Users = ()=>{
         cancelButtonText: "خیر"
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            title: "حذف شد!",
-            text: "",
-            icon: "success"
-          });
+            axios.delete(`https://jsonplaceholder.typicode.com/users/${x}`).then(res=>{
+                if (res.status===200) {
+                    const newusers = users.filter(y=> y.id !== x)
+                    setUsers(newusers)
+                } else {
+                    console.log("error")
+                }
+                Swal.fire({
+                    title: "حذف شد!",
+                    text: "",
+                    icon: "success"
+                  });
+            })
         }
       });
   }
@@ -78,7 +86,7 @@ const Users = ()=>{
                         <td>{U.email}</td>
                         <td> 
                             <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigate("/adduser/1")}></i>
-                            <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handledelete(1)}></i>
+                            <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handledelete(U.id)}></i>
                         </td>
                     </tr>
 ))}
