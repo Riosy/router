@@ -71,7 +71,7 @@ const Users = ()=>{
                 </thead>
                 <tbody>
 {users.map(U=>(
-                        <tr>
+                        <tr key={U.id}>
                         <td>{U.id}</td>
                         <td>{U.name}</td>
                         <td>{U.username}</td>

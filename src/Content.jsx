@@ -25,6 +25,7 @@ const Content = ()=>{
             onClick={handleShowMenu}
             ></i>        
  <Routes>
+    
     <Route path='/users/*'element={<Users/>} />
     <Route path='/posts'element={<Posts/>} />
     <Route path='/gallery'element={<Gallery/>} />
